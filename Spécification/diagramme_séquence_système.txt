@@ -1,0 +1,39 @@
+@startuml
+skinparam sequenceArrowThickness 2
+skinparam roundcorner 20
+skinparam maxmessagesize 60
+skinparam sequenceParticipant underline
+
+actor User
+participant "Système" as A
+
+
+User -> A: Ouverture_2048
+activate A
+
+A -> User: Affichage_2048_principal
+
+alt jeu humain
+    User -> A: Ask_play
+    A --> User: Affichage_2048_game
+    loop jeu
+       alt play/new game
+          User -> A: Deplacer_Case
+          A --> User: Actualisation_2048
+       else return
+          User -> A: Return_accueil
+          A --> User: Affichage_2048_principal
+       end
+    end
+else jeu IA1
+    User -> A: Watch_IA1
+    A --> User: Affichage_2048_IA1
+else jeu IA2
+    User -> A: Watch_IA2
+    A --> User: Affichage_2048_IA2
+else quitter
+    User -> A:Quitter_jeu
+    A --> User: Close_2048
+end    
+deactivate A
+@enduml
