@@ -1,0 +1,38 @@
+@startuml
+actor Utilisateur
+Utilisateur -> Joueur: choisirJoueur
+
+Joueur -> 2048: créer2048
+
+  2048 -> Joueur
+
+loop
+    
+        alt 
+            Joueur -> 2048: déplacerHaut
+            
+            else 
+            Joueur -> 2048: déplacerBas
+            
+            else 
+            Joueur -> 2048: déplacerDroite
+            
+            else
+            Joueur -> 2048: déplacerGauche
+            
+        end
+        
+    2048 -> Case : déplacerCases
+    
+    Case -> 2048
+    
+    2048 -> 2048: actualiser2048
+    
+    2048 -> Joueur
+    
+    Joueur -> Joueur: actualiserScore
+    
+end
+
+Joueur -> Utilisateur 
+@enduml
