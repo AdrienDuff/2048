@@ -1,0 +1,42 @@
+@startuml
+
+title Modèle du domaine
+left to right direction
+
+
+class Joueur {
+  Int score
+}
+
+class Humain {
+
+}
+
+class IA1 {
+
+}
+
+class IA2 {
+
+}
+
+class 2048{
+    Int maxScore
+}
+
+class Case{
+  Int valeur
+  Int posX
+  Int posY
+  Couleur c
+}
+
+2048 "1" --* "16" Case
+
+Joueur <|-- Humain
+Joueur <|-- IA1
+Joueur <|-- IA2
+
+Joueur "1" -- "1" 2048
+
+@enduml

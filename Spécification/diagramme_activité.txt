@@ -1,0 +1,28 @@
+@startuml
+
+title Digramme d'activité
+
+
+start
+
+repeat
+
+    :Menu principal;
+    if (Jouer?) then (yes)
+        while (perdu?) is (no)
+            :Faire mouvement;
+        endwhile (yes)
+    elseif (Observer IA 1?) then (yes)
+        :Observer IA;
+    elseif (Observer IA 2?) then (yes)
+        :Observer IA;
+    else
+        :Quitter;
+        stop
+    endif
+  
+repeat while (retour?) is (yes)
+
+stop
+
+@enduml

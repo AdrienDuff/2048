@@ -1,0 +1,37 @@
+@startuml
+
+title Diagramme des cas d'utilisations
+left to right direction
+
+:Joueur:
+
+rectangle 2048 {
+(Jouer)
+(Observer IA 1)
+(Observer IA 2)
+(Quitter)
+(Faire un mouvement)
+(Haut)
+(Gauche)
+(droite)
+(Bas)
+}
+Joueur --> (Jouer)
+
+Joueur --> (Observer IA 1)
+Joueur --> (Observer IA 2)
+Joueur --> (Quitter)
+
+(Jouer)--> (Quitter)
+(Observer IA 1) --> (Quitter)
+(Observer IA 2) --> (Quitter)
+
+(Jouer) ..> (Faire un mouvement) : <<include>>
+(Faire un mouvement) <.. (Haut) : <<extends>>
+(Faire un mouvement) <.. (Gauche) : <<extends>>
+(Faire un mouvement) <.. (droite) : <<extends>>
+(Faire un mouvement) <.. (Bas) : <<extends>>
+
+
+
+@enduml
