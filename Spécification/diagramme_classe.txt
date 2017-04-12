@@ -1,0 +1,51 @@
+@startuml
+
+class 2048 {
++int static MAX_SCORE
++ void main()
+}
+abstract class Joueur {
+- int score
+- String nom
++ Joueur(String monNom, int monScore)
++ jouer()
+}
+abstract class Joueur <<Abstract>>
+class IA1 {
+- int scoreIA1
++ IA(int leScore1)
++ jouer()
+}
+class IA2 {
+- int scoreIA2
++ IA(int leScore2)
++ jouer()
+}
+class tensorflow{
++ initialize_all_variables()
++ run()
++ train()
++ Session()
+}
+class Humain {
+- int scoreHumain
+- String nom
++ Humain(String monNom, int monScore)
++jouer()
+}
+class Case {
+- int valeurCase
++ Case(int uneValeur)
++ boolean estVide()
++ void deplacerHaut()
++ void deplacerBas()
++ void deplacerDroite()
++ void deplacerGauche()
+}
+2048 "1" -- "1" Joueur
+2048 "1" *-- "16" Case : contains
+Joueur "1" <|-- "1" IA1
+Joueur "1" <|-- "1" IA2
+Joueur "1" <|-- "1" Humain
+IA2 -- tensorflow
+@enduml
