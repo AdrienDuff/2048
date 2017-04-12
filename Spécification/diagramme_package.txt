@@ -1,0 +1,19 @@
+@startuml
+artifact Jeu {
+  folder 2048
+  folder Joueur
+  folder Humain
+  folder IA1
+  folder Case
+}
+artifact Affichage {
+  folder QT
+}
+artifact Reseaux_de_neuronnes {
+  folder IA2
+  folder tensorflow
+}
+
+Affichage ..Jeu
+Jeu .. Reseaux_de_neuronnes
+@enduml
