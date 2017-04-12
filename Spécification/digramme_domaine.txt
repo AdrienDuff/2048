@@ -1,4 +1,4 @@
-@startuml
+﻿@startuml
 
 title Modèle du domaine
 left to right direction
@@ -31,11 +31,11 @@ class Case{
   Couleur c
 }
 
-2048 "1" --* "16" Case
+2048 "1" *-- "16" Case
 
-Joueur <|-- Humain
-Joueur <|-- IA1
-Joueur <|-- IA2
+Joueur "1" <|-- "1" Humain
+Joueur "1" <|-- "1" IA1
+Joueur "1" <|-- "1" IA2
 
 Joueur "1" -- "1" 2048
 
