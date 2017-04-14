@@ -1,9 +1,11 @@
+#include "../include/Case.h"
 #include <iostream>
 
 using namespace std;
 
 int main()
 {
-    cout << "Hello world!" << endl;
+    Case maCase(2);
+    cout << maCase.estVide() << endl;
     return 0;
 }

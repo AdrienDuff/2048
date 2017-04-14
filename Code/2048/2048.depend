@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1492169732 source:c:\users\benjamin\desktop\gm\gm4\2048\code\2048\main.cpp
+	"../include/Case.h"
+	<iostream>
+
+1492169984 c:\users\benjamin\desktop\gm\gm4\2048\code\2048\include\case.h
+	<iostream>
+
+1492170078 source:c:\users\benjamin\desktop\gm\gm4\2048\code\2048\src\case.cpp
+	"../include/Case.h"
+	<iostream>
+
