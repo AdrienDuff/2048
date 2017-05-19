@@ -68,3 +68,26 @@ bool Test_App_2048::Test_4(){
 
     return jeu.aGagne();
 }
+bool Test_App_2048::Test_5(){
+    int tab[16];
+    tab[0]=2;
+    tab[1]=4;
+    tab[2]=8;
+    tab[3]=16;
+    tab[4]=32;
+    tab[5]=64;
+    tab[6]=128;
+    tab[7]=256;
+    tab[8]=512;
+    tab[9]=1024;
+    tab[10]=2048;
+    tab[11]=4096;
+    tab[12]=8192;
+    tab[13]=16384;
+    tab[14]=32768;
+    tab[15]=65536;
+    Jeu newjeu(16);
+    newjeu.getGrilleJeu()->setGrille(tab);
+    if(!(newjeu.getGrilleJeu()->movePossible())){newjeu.setFinJeu(true);}
+    return (!newjeu.getGrilleJeu()->movePossible()) && (newjeu.isGameOver()) && (newjeu.getGrilleJeu()->full());
+}

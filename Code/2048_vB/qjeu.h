@@ -49,6 +49,7 @@ public:
     void IA1();
     void IA2();
     void IA3();
+    void IA();
 signals:
 
 public slots:

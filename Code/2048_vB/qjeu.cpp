@@ -68,7 +68,7 @@ QJeu::QJeu(QWidget *parent) : QWidget(parent)
 void QJeu::keyPressEvent(QKeyEvent *event){
     switch (event->key()) {
     case Qt::Key_Up:
-        jeu->move(DOWN);
+        jeu->move(UP);
         break;
     case Qt::Key_Left:
         jeu->move(LEFT);
@@ -77,13 +77,13 @@ void QJeu::keyPressEvent(QKeyEvent *event){
         jeu->move(RIGHT);
         break;
     case Qt::Key_Down:
-        jeu->move(UP);
+        jeu->move(DOWN);
         break;
     case Qt::Key_Enter:
-        IA3();
+        IA();
         break;
     case Qt::Key_Space:
-        IA2();
+        IA3();
         break;
 
     }
@@ -139,13 +139,13 @@ void QJeu::IA1() {
     while(!jeu->isGameOver()){
 
         jeu->move(UP);
-        speedIA(200);
+        speedIA(2000);
         jeu->move(RIGHT);
-        speedIA(200);
+        speedIA(2000);
         jeu->move(LEFT);
-        speedIA(200);
+        speedIA(2000);
         jeu->move(DOWN);
-        speedIA(200);
+        speedIA(2000);
     }
 }
 
@@ -225,10 +225,10 @@ void QJeu::IA3(){
         Jeu jeutmp(jeu->getGrilleJeu()->getDim());
         jeutmp.getGrilleJeu()->setGrille(tab_grille);*/
 
-        Direction move_direction =UP;
-        if(!(jeu->getGrilleJeu()->movePossiblein(UP))){
+        Direction move_direction =DOWN;
+        if(!(jeu->getGrilleJeu()->movePossiblein(DOWN))){
             if(jeu->getGrilleJeu()->movePossiblein(RIGHT) && jeu->getGrilleJeu()->movePossiblein(LEFT)){
-                if (jeu->getGrilleJeu()->countZeroAfter(LEFT,UP) >= jeu->getGrilleJeu()->countZeroAfter(RIGHT,UP)){
+                if (jeu->getGrilleJeu()->countZeroAfter(LEFT,DOWN) >= jeu->getGrilleJeu()->countZeroAfter(RIGHT,DOWN)){
                         move_direction=LEFT;
 
                 } else {
@@ -239,14 +239,46 @@ void QJeu::IA3(){
             } else if (jeu->getGrilleJeu()->movePossiblein(RIGHT)){
                 move_direction=RIGHT;
             } else {
-                move_direction = DOWN;
+                move_direction = UP;
             }
         }
 
 
 
         jeu->move(move_direction);
-        drawBoard();
         speedIA(200);
     }
 }
+
+void QJeu::IA() {
+    while(!(this->jeu->isGameOver())){
+          Direction dir_interdite = UP;
+         /*if (this->jeu->getGrilleJeu()->movePossiblein(DOWN)){
+                this->jeu->move(DOWN);
+          speedIA(200);
+          }*/
+
+          if (!(this->jeu->getGrilleJeu()->movePossiblein(DOWN))){
+               if (this->jeu->getGrilleJeu()->movePossiblein(RIGHT) && this->jeu->getGrilleJeu()->movePossiblein(LEFT)){
+                    if (this->jeu->getGrilleJeu()->countZeroAfter(LEFT,DOWN) > this->jeu->getGrilleJeu()->countZeroAfter(RIGHT,DOWN)){
+                        this->jeu->move(LEFT);
+                    } else if (this->jeu->getGrilleJeu()->countZeroAfter(LEFT,DOWN) == this->jeu->getGrilleJeu()->countZeroAfter(RIGHT,DOWN)) {
+                        this->jeu->move(LEFT);
+                    } else {
+                        this->jeu->move(RIGHT);
+                    }
+               } else if (this->jeu->getGrilleJeu()->movePossiblein(LEFT)){
+                    this->jeu->move(LEFT);
+
+               } else if (this->jeu->getGrilleJeu()->movePossiblein(RIGHT)){
+                    this->jeu->move(RIGHT);
+               } else {
+                    this->jeu->move(dir_interdite);
+               }
+           } else {
+            this->jeu->move(DOWN);
+         }
+         speedIA(200);
+    }
+}
+

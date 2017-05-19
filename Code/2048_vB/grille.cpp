@@ -141,9 +141,9 @@ void Grille::moveLeft(){
 }
 
 void Grille::moveBottom(){
-    rotate(1);
-    moveLeft();
     rotate(3);
+    moveLeft();
+    rotate(1);
 }
 
 void Grille::moveRight(){
@@ -153,9 +153,9 @@ void Grille::moveRight(){
 }
 
 void Grille::moveTop(){
-    rotate(3);
-    moveLeft();
     rotate(1);
+    moveLeft();
+    rotate(3);
 }
 
 void Grille::move(Direction direction){
@@ -201,41 +201,9 @@ bool Grille::changed(Grille& newGrille) const {
     return false;
 }
 
-bool Grille::movePossible() const {
+bool Grille::movePossible() {
     if (full()) {
-        for (int i=0; i<4;i++){
-            Direction dir;
-            switch(i){
-            case 0:
-                dir = UP;
-                break;
-            case 1:
-                dir = DOWN;
-                break;
-            case 2:
-                dir = RIGHT;
-                break;
-            case 3:
-                dir = LEFT;
-                break;
-            }
-            Grille newGrille(*this);
-            newGrille.move(dir);
-            if (this->changed(newGrille) == true){
-                return true;
-            }
-        }
-
-        /*newGrille.move(UP);
-        if (changed(newGrille)) return true;
-        newGrille.move(DOWN);
-        if (changed(newGrille)) return true;
-        newGrille.move(LEFT);
-        if (changed(newGrille)) return true;
-        newGrille.move(RIGHT);
-        if (changed(newGrille)) return true;*/
-        cout << "pas de move possible";
-        return false;
+        return ((movePossiblein(UP))||(movePossiblein(DOWN))||(movePossiblein(LEFT))||(movePossiblein(RIGHT)));
     } else { return true;}
 }
 
@@ -249,8 +217,11 @@ bool Grille::movePossiblein(Direction direction) {
 
 int Grille::countZeroAfter(Direction dir1,Direction dir2){
     Grille next_grille(*this);
+    int scoreM=0;
     next_grille.move(dir1);
+   // scoreM+=next_grille.getScore()*0.1;
     next_grille.move(dir2);
+   // scoreM+=next_grille.getScore()*0.9;
     int count=0;
     for(int i=0; i<this->dim;i++){
         if (next_grille.getValue(i)==0){
@@ -259,7 +230,7 @@ int Grille::countZeroAfter(Direction dir1,Direction dir2){
         }
     }
     cout << count << endl;
-    return count;
+    return count+scoreM;
 }
 
 void Grille::setGrille(int tab_grille[]){

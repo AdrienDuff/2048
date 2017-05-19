@@ -38,7 +38,7 @@ public:
     void moveBottom();
     void moveTop();
     void move(Direction direction);
-    bool movePossible() const;
+    bool movePossible();
     bool movePossiblein(Direction direction);
     bool changed(Grille& newGrille) const;
     int countZeroAfter(Direction dir1, Direction dir2);

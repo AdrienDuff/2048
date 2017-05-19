@@ -6,6 +6,7 @@
 #include "jeu.h"
 #include "qjeu.h"
 #include "qgameoverwindow.h"
+#include "test_app_2048.h"
 
 #include <iostream>
 #include <cstdlib>
@@ -35,7 +36,6 @@ int main(int argc, char *argv[])
    QApplication a(argc, argv);
 
     srand(time(NULL));
-    cout << !true << "=false" << endl;
 
     QWidget fenetre;
            QPushButton *jeuSolo = new QPushButton("Jouer",&fenetre);
@@ -53,6 +53,17 @@ int main(int argc, char *argv[])
 
 
     fenetre.show();
+
+
+    Test_App_2048 test_unitaire;
+    cout << "                       Batterie de tests unitaires sur le jeu 20480" << endl;
+    cout << " Test 1 : renvoie 1 si on recupere la bonne dimension, le bon score et fonction setValue fonctionnelle -->  " << test_unitaire.Test_1() << endl;
+    cout << " Test 2 : renvoie 1 si la fonction moveLeft est fonctionnelle -->                                           " << test_unitaire.Test_2() << endl;
+    cout << " Test 3 : renvoie 1 si la fonction rotate est fonctionnelle -->                                             " << test_unitaire.Test_3() << endl;
+    cout << " Test 4 : renvoie 1 si le test de la fonction aGagne() est valide  -->                                      " << test_unitaire.Test_4() << endl;
+    cout << " Test 5 : renvoie 1 si le test des fonctions isGameOver(), full() et movePossible() est valide -->          " << test_unitaire.Test_5() << endl;
+
+
 
 
     return a.exec();
