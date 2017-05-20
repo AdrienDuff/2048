@@ -17,14 +17,11 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-   /* Grille maGrille(16);
-    maGrille.affiche();
-    maGrille.rotate(2);
-    maGrille.affiche();
-    maGrille.moveLeft();
-    maGrille.rotate(2);
-    maGrille.affiche();
+   Jeu maGrille(16);
+    maGrille.getGrilleJeu()->affiche();
     maGrille.move(UP);
+    maGrille.getGrilleJeu()->affiche();
+   /* maGrille.move(UP);
     maGrille.affiche();
     cout << maGrille.movePossiblein(UP) << true << endl;
      maGrille.affiche();

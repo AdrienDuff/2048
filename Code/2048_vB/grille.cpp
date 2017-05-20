@@ -141,9 +141,9 @@ void Grille::moveLeft(){
 }
 
 void Grille::moveBottom(){
-    rotate(3);
-    moveLeft();
     rotate(1);
+    moveLeft();
+    rotate(3);
 }
 
 void Grille::moveRight(){
@@ -153,9 +153,9 @@ void Grille::moveRight(){
 }
 
 void Grille::moveTop(){
-    rotate(1);
-    moveLeft();
     rotate(3);
+    moveLeft();
+    rotate(1);
 }
 
 void Grille::move(Direction direction){
@@ -202,17 +202,21 @@ bool Grille::changed(Grille& newGrille) const {
 }
 
 bool Grille::movePossible() {
-    if (full()) {
+
         return ((movePossiblein(UP))||(movePossiblein(DOWN))||(movePossiblein(LEFT))||(movePossiblein(RIGHT)));
-    } else { return true;}
 }
 
 bool Grille::movePossiblein(Direction direction) {
-    if (full()) {
+    /*if (full()) {
+        Grille tmp(*this);
         Grille newGrille(*this);
         newGrille.move(direction);
-        return (this->changed(newGrille) == true);
-    } else { return true;}
+        return (newGrille.changed(tmp) == true);
+    } else { return true;}*/
+    Grille tmp(*this);
+    Grille newGrille(*this);
+    newGrille.move(direction);
+    return (newGrille.changed(tmp) == true);
 }
 
 int Grille::countZeroAfter(Direction dir1,Direction dir2){
@@ -230,7 +234,7 @@ int Grille::countZeroAfter(Direction dir1,Direction dir2){
         }
     }
     cout << count << endl;
-    return count+scoreM;
+    return count-1;
 }
 
 void Grille::setGrille(int tab_grille[]){

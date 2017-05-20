@@ -32,8 +32,14 @@ void Jeu::restart(){
 }
 
 void Jeu::move(Direction dir){
+    if(this->grilleJeu->movePossiblein(dir)){
     this->grilleJeu->move(dir);
     scoreJeu+=grilleJeu->getScore();
+    cout << "mouvement : " << dir << endl;
+    }
+    else {
+        cout << "pas possible" << endl;
+    }
     if(!grilleJeu->movePossible()){ finJeu = true;}
     notifyObservers();
 }

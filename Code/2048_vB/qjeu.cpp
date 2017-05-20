@@ -104,15 +104,16 @@ void QJeu::notify(){
 void QJeu::drawBoard(){
     delete boardLayout;
     boardLayout = new QGridLayout();
-    int lign = jeu->getGrilleJeu()->getCol();
+    int col = jeu->getGrilleJeu()->getCol();
+    int lign = 4;
     while(lign != 0){
-        for (int i=0;i<jeu->getGrilleJeu()->getCol();i++){
-            int ind((jeu->getGrilleJeu()->getCol()-lign)*jeu->getGrilleJeu()->getCol()+i);
+        for (int i=0;i<col;i++){
+            int ind((col-lign)*4+i);
             delete gui_grille[ind];
 
             gui_grille[ind] = new Qcolorcase(jeu->getGrilleJeu(),ind);
 
-            boardLayout->addWidget(gui_grille[(jeu->getGrilleJeu()->getCol()-lign)*jeu->getGrilleJeu()->getCol()+i],lign,i);
+            boardLayout->addWidget(gui_grille[ind],col-lign,i);
         }
         lign--;
     }
@@ -225,10 +226,10 @@ void QJeu::IA3(){
         Jeu jeutmp(jeu->getGrilleJeu()->getDim());
         jeutmp.getGrilleJeu()->setGrille(tab_grille);*/
 
-        Direction move_direction =DOWN;
-        if(!(jeu->getGrilleJeu()->movePossiblein(DOWN))){
+        Direction move_direction =UP;
+        if(!(jeu->getGrilleJeu()->movePossiblein(UP))){
             if(jeu->getGrilleJeu()->movePossiblein(RIGHT) && jeu->getGrilleJeu()->movePossiblein(LEFT)){
-                if (jeu->getGrilleJeu()->countZeroAfter(LEFT,DOWN) >= jeu->getGrilleJeu()->countZeroAfter(RIGHT,DOWN)){
+                if (jeu->getGrilleJeu()->countZeroAfter(LEFT,UP) > jeu->getGrilleJeu()->countZeroAfter(RIGHT,UP)){
                         move_direction=LEFT;
 
                 } else {
@@ -239,7 +240,7 @@ void QJeu::IA3(){
             } else if (jeu->getGrilleJeu()->movePossiblein(RIGHT)){
                 move_direction=RIGHT;
             } else {
-                move_direction = UP;
+                move_direction = DOWN;
             }
         }
 
