@@ -1,19 +1,22 @@
 @startuml
-artifact Jeu {
-  folder 2048
-  folder Joueur
-  folder Humain
-  folder IA1
-  folder Case
+artifact Corps {
+  folder Grille
+  folder Jeu
+  folder Observer
+  folder subject
+  folder Test_App_2048
 }
-artifact Affichage {
-  folder QT
-}
-artifact Reseaux_de_neuronnes {
-  folder IA2
-  folder tensorflow
+artifact Qt {
+  folder QColorCase
+  folder Qjeu
+  folder QResetButton
+  folder QGameOverWindow
+  folder MainWindow
 }
 
-Affichage ..Jeu
-Jeu .. Reseaux_de_neuronnes
+folder Main
+
+Qt .. Corps : appelle
+Main ..> Qt : use
+Main ..> Corps : use
 @enduml

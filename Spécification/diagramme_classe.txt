@@ -1,51 +1,119 @@
 @startuml
+class Grille {
+ enum const Direction
+- int dim
+-QVector<int> grille
+-int score
+-int col
+-int lignes
 
-class 2048 {
-+int static MAX_SCORE
-+ void main()
++ Grille()
++ void init()
++ void reset()
++ void moveLeft()
++ void rotate(int nr)
+...
++void move(Direction dir)
++ bool full()
++bool movePossiblein(Direction dir)
++bool changed(Grille& magrille)
++int countZeroAfter(Direction dir1, Direction dir 2)
 }
-abstract class Joueur {
-- int score
-- String nom
-+ Joueur(String monNom, int monScore)
-+ jouer()
+class Jeu {
+#define VAL_MAX 2048
+
+- Grille* grillejeu
+- int scoreJeu
+- bool finJeu
+
++ Jeu(int dim)
++ void restart
++ void move(Direction dir)
++bool aGagne()
 }
-abstract class Joueur <<Abstract>>
-class IA1 {
-- int scoreIA1
-+ IA(int leScore1)
-+ jouer()
+interface Observer{
++Observer()
++virtual void notify()
 }
-class IA2 {
-- int scoreIA2
-+ IA(int leScore2)
-+ jouer()
+class Subject{
+-vector<Observer*> observers
++Subject()
++void notifyObservers()
 }
+
+
+class QColorCase{
+- Grille* gameboard
+- int valeurCase
++ QColorcase(Grille* grilleJeu, int numCase)
++QColorcase(const QString & text)
++void draw()
+}
+
+interface QLabel{
+}
+
+class QGameOverWindow{
++QgameOverWindow()
+}
+class QResetbutton{
++QResetButon()
+}
+class MainWindow{
++MainWindow
+}
+
+class QJeu{
+-Jeu* jeu
+-QVector<QColocase*> gui_grille
+...
+- voiddrawBoard()
++QJeu(QWdidget *parent)
++void notify();
++void speedIA(int ms);
++void IA1();
++void IA2();
+
++slots : void resetGame()
+}
+
+class Test_App_2048{
++Test_App_2048()
++bool Test1()
++bool Test2()
++bool Test3()
++bool Test4()
++bool Test5()
+}
+
 class tensorflow{
 + initialize_all_variables()
 + run()
 + train()
 + Session()
 }
-class Humain {
-- int scoreHumain
-- String nom
-+ Humain(String monNom, int monScore)
-+jouer()
+
+class Main{
++int main()
 }
-class Case {
-- int valeurCase
-+ Case(int uneValeur)
-+ boolean estVide()
-+ void deplacerHaut()
-+ void deplacerBas()
-+ void deplacerDroite()
-+ void deplacerGauche()
-}
-2048 "1" -- "1" Joueur
-2048 "1" *-- "16" Case : contains
-Joueur "1" <|-- "1" IA1
-Joueur "1" <|-- "1" IA2
-Joueur "1" <|-- "1" Humain
-IA2 -- tensorflow
+
+Jeu <|-- Subject
+Grille <|-- Subject
+Subject ..|> Observer : implement
+
+Test_App_2048 *-- QJeu
+
+Jeu "1" *-- "1" Grille
+QJeu "1" *-- "1" Jeu
+QJeu "1" *-- "16" QColorCase : contains
+QJeu "1" *-- "1" QGameOverWindow
+QJeu "1" *-- "1" QResetbutton
+QJeu "1" *-- "1" MainWindow
+
+QColorCase ..|> QLabel : implement
+QJeu ..|> QLabel : implement
+QJeu ..|> tensorflow : implement
+
+Main -- Test_App_2048
+Main *-- QJeu
 @enduml
