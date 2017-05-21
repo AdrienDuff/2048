@@ -31,6 +31,8 @@ int main(int argc, char *argv[])
     QWidget::connect(jeuSolo, SIGNAL(clicked()), &board, SLOT(show()));
     QWidget::connect(jeuSolo,SIGNAL(clicked()),&fenetre,SLOT(close()));
 
+
+
     fenetre.show();
 
 

@@ -24,6 +24,7 @@ public:
     ~QGameBoard();
 
     void notify();
+    void speedIA(int ms);
 
 private:
 
@@ -50,6 +51,7 @@ signals:
 
 public slots:
     void resetGame();
+    void IA_neural();
 
 };
 

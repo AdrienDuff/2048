@@ -1,0 +1,6 @@
+
+#define GTKMM_MAJOR_VERSION 1
+#define GTKMM_MINOR_VERSION 2
+#define GTKMM_MICRO_VERSION 8
+#define PACKAGE "gtkmm"
+#define VERSION "1.2.8"

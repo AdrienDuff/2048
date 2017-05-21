@@ -3,8 +3,8 @@
 
 #define WINNING_VALUE 2048
 
-#include "core/subject.h"
-#include "core/board.h"
+#include "subject.h"
+#include "board.h"
 
 class Board;
 
