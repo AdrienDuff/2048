@@ -1,0 +1,47 @@
+12:15:41 **** Build of configuration Debug for project 2048 ****
+make all 
+Building file: ../src/Case.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/Case.d" -MT"src/Case.o" -o "src/Case.o" "../src/Case.cpp"
+../src/Case.cpp:1:18: fatal error: Case.h: Aucun fichier ou dossier de ce type
+ #include "Case.h"
+                  ^
+compilation terminated.
+make: *** [src/Case.o] Erreur 1
+12:16:25 **** Incremental Build of configuration Debug for project 2048 ****
+make all 
+Building file: ../src/Case.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/Case.d" -MT"src/Case.o" -o "src/Case.o" "../src/Case.cpp"
+Finished building: ../src/Case.cpp
+ 
+Building file: ../.metadata/.plugins/org.eclipse.cdt.make.core/specs.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF".metadata/.plugins/org.eclipse.cdt.make.core/specs.d" -MT".metadata/.plugins/org.eclipse.cdt.make.core/specs.o" -o ".metadata/.plugins/org.eclipse.cdt.make.core/specs.o" "../.metadata/.plugins/org.eclipse.cdt.make.core/specs.c"
+Finished building: ../.metadata/.plugins/org.eclipse.cdt.make.core/specs.c
+ 
+Building file: ../main.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+Finished building: ../main.cpp
+ 
+Building target: 2048
+Invoking: GCC C++ Linker
+g++  -o "2048"  ./src/Case.o  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./main.o   
+Finished building target: 2048
+ 
+12:16:42 **** Incremental Build of configuration Debug for project 2048 ****
+make all 
+make: Rien à faire pour « all ».
+12:37:08 **** Build of configuration Debug for project 2048 ****
+make all 
+Building file: ../src/Ia2.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/Ia2.d" -MT"src/Ia2.o" -o "src/Ia2.o" "../src/Ia2.cpp"
+Finished building: ../src/Ia2.cpp
+ 
+Building target: 2048
+Invoking: GCC C++ Linker
+g++  -o "2048"  ./src/Case.o ./src/Ia2.o  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./main.o   
+Finished building target: 2048
+ 

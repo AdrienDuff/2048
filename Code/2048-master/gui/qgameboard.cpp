@@ -12,8 +12,24 @@
 #include <QKeyEvent>
 #include <QVBoxLayout>
 #include <QString>
+#include <QTimer>
+#include <QEventLoop>
+#include <ctime>
 
 #include <QDebug>
+#include <iostream>
+
+//#include "rtNEAT.1.0.2/genome.h"
+//#include "rtNEAT.1.0.2/genome.cpp"
+//#include "rtNEAT.1.0.2/population.h"
+//#include "rtNEAT.1.0.2/neat.h"
+//#include "rtNEAT.1.0.2/network.h"
+#include "rtNEAT.1.0.2/experiments.h"
+#include <cstring>
+#include <valarray>
+#include <unistd.h>
+using namespace std;
+using namespace NEAT;
 
 QGameBoard::~QGameBoard()
 {
@@ -80,6 +96,9 @@ void QGameBoard::keyPressEvent(QKeyEvent *event)
     case Qt::Key_Down:
         game->move(DOWN);
         break;
+    case Qt::Key_Space:
+        IA_neural();
+        break;
     }
 }
 
@@ -118,4 +137,116 @@ void QGameBoard::resetGame()
     drawBoard();
     score->setText(QString("SCORE: %1").arg(game->getScore()));
     gameOverWindow.hide();
+}
+
+
+void QGameBoard::IA_neural() {
+    Population *pop=0;
+    Genome *start_genome;
+    char curword[20];
+    int id;
+    int indice_max;
+    int indice_pred;
+    Direction dir;
+    vector<double> out(4);
+    vector<double> temp(4);
+    vector<double> out_ini(4);
+    bool success;
+    bool maxfound;
+    int to_check;
+    
+
+
+    ifstream iFile("jeu2048_winner",ios::in);
+
+    //Read in the start Genome
+    iFile>>curword;
+    iFile>>id;
+    cout<<"Reading in Genome id "<<id<<endl;
+    start_genome= new Genome(id,iFile);
+    iFile.close();
+
+    pop=new Population(start_genome,1);
+    cout<<"Verifying Spawned Pop"<<endl;
+    pop->verify();
+
+    Organism* org;
+    org = pop->organisms[0];
+    Network *net;
+    net=org->net;
+    vector<float> in;
+    Board* b = game->getGameBoard();
+    bool gameover = false;
+    while(!game->isGameOver()){
+        in.clear();
+        //Il noust faut un tableau de 16 avec les cases.
+        for (int i=0; i<=3;i++){
+          for(int j=0; j<=3;j++){
+            if (b->board[i][j] == NULL){
+              in.push_back(0.0);
+            }else{
+              in.push_back(b->board[i][j]->getValue());
+            }
+          }
+        }
+
+        net->load_sensors(in);
+        success=net->activate();
+        //cout << success << endl;
+        for(int i=0;i <4;i++){
+          out[i] = net->outputs[i]->activation;
+        }
+        temp = out;
+        out_ini = out;
+        sort(temp.begin(), temp.begin()+4);
+
+        //for(int unsigned i=0;i<4;i++){cout << "-" << out[i];} 
+        //cout << endl;
+        //for(int unsigned i=0;i<4;i++){cout << "-" << temp[i];} 
+        //cout << endl;
+
+        maxfound = false;
+        to_check = 3;
+        indice_pred = -1;
+        while (maxfound == false and gameover == false){
+          indice_max = distance(out.begin(), std::find(out.begin(), out.end(), temp[to_check]));
+          while (indice_max == indice_pred){
+            out[indice_max] = -1;
+            indice_max = distance(out.begin(), std::find(out.begin(), out.end(), temp[to_check]));
+          }
+          switch(indice_max){
+            case 0: dir = UP;
+                    break;
+            case 1: dir = DOWN;
+                    break;
+            case 2: dir = LEFT;
+                    break;
+            case 3: dir = RIGHT;
+                    break;
+          }
+          Board other = Board(*b);
+          b->move(dir);
+          if (b->changed(other)){
+            maxfound =true;
+          }
+          //cout << dir << endl;
+          
+          indice_pred = indice_max;
+          to_check--;
+          if (to_check == -1){
+            gameover = true;
+          }
+        }
+
+        net->flush();
+        game->move(dir);
+        speedIA(50);
+
+    }
+}
+
+void QGameBoard::speedIA(int ms) {
+    QEventLoop eventLoop;
+    QTimer::singleShot (ms, &eventLoop, SLOT (quit ()));
+    eventLoop.exec ();
 }

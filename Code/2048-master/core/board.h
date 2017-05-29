@@ -1,7 +1,7 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-#include "core/subject.h"
+#include "subject.h"
 
 #include <QVector>
 #include <QString>
@@ -28,15 +28,17 @@ public:
     bool isTileCollisionLastRound() const { return tileCollisionLastRound; }
     // mouvement possible ?
     bool movePossible() const;
+    QVector<QVector<Tile*> > board;
+    bool changed(Board& other) const;
 
 private:
-    QVector<QVector<Tile*> > board;
+    
     int dimension;
 
     void init();
     // position aléatoire
     QVector<int> freePosition();
-    bool changed(Board& other) const;
+    
 
     bool inbounds(int i, int j);
     void moveHorizontally(int i, int j, Direction dir);

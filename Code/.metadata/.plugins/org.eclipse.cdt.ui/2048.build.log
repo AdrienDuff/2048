@@ -1,0 +1,15 @@
+12:37:08 **** Build of configuration Debug for project 2048 ****
+make all 
+Building file: ../src/Ia2.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/Ia2.d" -MT"src/Ia2.o" -o "src/Ia2.o" "../src/Ia2.cpp"
+Finished building: ../src/Ia2.cpp
+ 
+Building target: 2048
+Invoking: GCC C++ Linker
+g++  -o "2048"  ./src/Case.o ./src/Ia2.o  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./main.o   
+Finished building target: 2048
+ 
+
+12:37:08 Build Finished (took 123ms)
+
